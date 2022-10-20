@@ -12,3 +12,10 @@ const gameTable = document.querySelector(".main-content");
 while (numberOfCards < 4 || numberOfCards > 14 || numberOfCards % 2 !== 0) {
   numberOfCards = prompt(`Digite um número par, por favor`);
 }
+
+//introduz os índices para referenciar as cartas
+while (cardsIndex.length < numberOfCards) {
+  cardsIndex.push(index);
+  cardsIndex.push(index);
+  index++;
+}
