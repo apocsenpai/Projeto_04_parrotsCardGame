@@ -1,6 +1,4 @@
-let numberOfCards = prompt(
-  `Digite um número par entre 4 e 14 (inclusos) de cartas: `
-);
+let numberOfCards = numberOfCardsSelector();
 
 //array qie irá receber os índices das cartas
 let cardsIndex = [];
@@ -16,37 +14,39 @@ let qntdJogadasCertas = 0;
 let clickedCardsArray = [];
 
 const gameTable = document.querySelector(".main-content");
-
-//Verifica se o número se enquadra nos requisitos
-while (numberOfCards < 4 || numberOfCards > 14 || numberOfCards % 2 !== 0) {
-  numberOfCards = prompt(`Digite um número par, por favor`);
+prepareTheGame();
+function numberOfCardsSelector() {
+  let numberOfCards = prompt(
+    `Digite um número par entre 4 e 14 (inclusos) de cartas: `
+  );
+  //Verifica se o número se enquadra nos requisitos
+  while (numberOfCards < 4 || numberOfCards > 14 || numberOfCards % 2 !== 0) {
+    numberOfCards = prompt(
+      `Digite um número par entre 4 e 14 (inclusos) de cartas:`
+    );
+  }
+  return numberOfCards;
 }
 
-// introduz os índices para referenciar as cartas
-while (cardsIndex.length < numberOfCards) {
-  cardsIndex.push(index);
-  cardsIndex.push(index);
-  index++;
+function prepareTheGame() {
+  // introduz os índices para referenciar as cartas
+  while (cardsIndex.length < numberOfCards) {
+    cardsIndex.push(index, index);
+    index++;
+  }
+  index = 0;
+  // chama a função que embaralha
+  cardsIndex.sort(shuffler);
+
+  //forEach para iterar a array usando a função que
+  // coloca os cards na tela
+  cardsIndex.forEach(cardsDealer);
+  //Seleciona todos os cards
+  const cards = document.querySelectorAll(".card");
+  //itera entre os cards passando a função que vira
+  // a carta
+  cards.forEach(flipCard);
 }
-
-//variaveis para o cronometro
-let millisecond = 0;
-let second = 0;
-let minute = 0;
-
-setInterval(stopwatch, 10);
-
-// chama a função que embaralha
-cardsIndex.sort(shuffler);
-
-//forEach para iterar a array usando a função que
-// coloca os cards na tela
-cardsIndex.forEach(cardsDealer);
-//Seleciona todos os cards
-const cards = document.querySelectorAll(".card");
-//itera entre os cards passando a função que vira
-// a carta
-cards.forEach(flipCard);
 
 // embaralha os itens da array
 function shuffler() {
@@ -71,7 +71,7 @@ function cardsDealer(individualCardIndex) {
 function flipCard(card) {
   card.addEventListener("click", function () {
     const clickedCard = this.querySelector(".front-img").getAttribute("src");
-    if(this.classList.contains('clicked')!==true){
+    if (this.classList.contains("clicked") !== true) {
       this.classList.add("clicked");
       clickedCardsArray.push(clickedCard);
       pairComparison();
@@ -104,14 +104,26 @@ function undoFlipCards() {
   clickedCardsArray = [];
 }
 
+//Mensagem que mostra se ele ganhou
 function wonThaGame() {
+ 
   setTimeout(() => {
     if (qntdJogadasCertas === numberOfCards / 2) {
-      alert(`Você ganhou em ${qntdClicks} jogadas!`);
+      alert(
+        `Você ganhou em ${qntdClicks} jogadas! E terminou em ${minute}m${second}s${millisecond}`
+      );
+      tryAgain();
     }
-  }, 1000);
+  }, 500);
 }
 
+//variaveis para o cronometro
+let millisecond = 0;
+let second = 0;
+let minute = 0;
+
+let stopwatchInterval = setInterval(stopwatch, 10);
+// conta o tempo desde o começo do game
 function stopwatch() {
   millisecond += 10;
   if (millisecond === 1000) {
@@ -125,4 +137,30 @@ function stopwatch() {
     }
   }
   document.querySelector(".millisecond").innerHTML = millisecond;
+}
+
+function tryAgain() {
+  let resposta = prompt("Gostaria de tentar novamente?");
+  if (resposta === "sim") {
+    reset();
+    numberOfCards = numberOfCardsSelector();
+    prepareTheGame();
+  } else if (resposta === "não") {
+    window.close();
+  } else {
+    tryAgain();
+  }
+}
+
+function reset(){
+  millisecond = 0;
+  minute = 0;
+  second = 0;
+  qntdClicks = 0;
+  qntdJogadasCertas = 0;
+  cardsIndex = [];
+  gameTable.innerHTML = "";
+  document.querySelector(".second").innerHTML = 0;
+  document.querySelector(".minute").innerHTML = 0;
+  document.querySelector(".millisecond").innerHTML = 0;
 }
