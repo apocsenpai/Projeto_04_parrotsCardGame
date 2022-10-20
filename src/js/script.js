@@ -6,6 +6,11 @@ let numberOfCards = prompt(
 let cardsIndex = [];
 let index = 0;
 
+// quantidade de clicks
+let qntdClicks = 0;
+
+// quantidade de jogadas certas
+let qntdJogadasCertas = 0;
 
 // Array que vai receber as cartas clicadas
 let clickedCardsArray = [];
@@ -62,7 +67,7 @@ function flipCard(card) {
     this.classList.add("clicked");
     clickedCardsArray.push(clickedCard);
     pairComparison();
-    
+    qntdClicks++;
   });
 }
 
@@ -74,16 +79,26 @@ function pairComparison() {
       setTimeout(undoFlipCards, 1000);
     } else {
       clickedCardsArray = [];
+      qntdJogadasCertas++;
+      wonThaGame();
     }
   }
 }
 
 // desvira as cartas selecionadas
 function undoFlipCards() {
-  clickedCardsArray.forEach((element)=>{
-    const clickedCard = document.querySelector(`.clicked img[src='${element}']`).parentNode.parentNode;
-    clickedCard.classList.remove('clicked');
+  clickedCardsArray.forEach((element) => {
+    const clickedCard = document.querySelector(`.clicked img[src='${element}']`)
+      .parentNode.parentNode;
+    clickedCard.classList.remove("clicked");
   });
   clickedCardsArray = [];
 }
 
+function wonThaGame() {
+  setTimeout(() => {
+    if (qntdJogadasCertas === numberOfCards / 2) {
+      alert(`Você ganhou em ${qntdClicks} jogadas!`);
+    }
+  }, 1000);
+}
