@@ -26,8 +26,11 @@ cardsIndex.sort(shuffler);
 //forEach para iterar a array usando a função que
 // coloca os cards na tela
 cardsIndex.forEach(cardsDealer);
-
-
+//Seleciona todos os cards
+const cards = document.querySelectorAll(".card");
+//itera entre os cards passando a função que vira 
+// a carta
+cards.forEach(flipCard); 
 
 // embaralha os itens da array
 function shuffler() {
@@ -47,3 +50,11 @@ function cardsDealer(individualCardIndex) {
     </div>
   </div>`;
 }
+
+// Vira a carta
+function flipCard(card) {
+  card.addEventListener("click", function () {
+    this.classList.add("clicked");
+  });
+}
+
