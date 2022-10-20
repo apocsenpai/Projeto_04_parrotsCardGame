@@ -6,6 +6,10 @@ let numberOfCards = prompt(
 let cardsIndex = [];
 let index = 0;
 
+
+// Array que vai receber as cartas clicadas
+let clickedCardsArray = [];
+
 const gameTable = document.querySelector(".main-content");
 
 //Verifica se o número se enquadra nos requisitos
@@ -28,9 +32,9 @@ cardsIndex.sort(shuffler);
 cardsIndex.forEach(cardsDealer);
 //Seleciona todos os cards
 const cards = document.querySelectorAll(".card");
-//itera entre os cards passando a função que vira 
+//itera entre os cards passando a função que vira
 // a carta
-cards.forEach(flipCard); 
+cards.forEach(flipCard);
 
 // embaralha os itens da array
 function shuffler() {
@@ -42,10 +46,10 @@ function cardsDealer(individualCardIndex) {
   gameTable.innerHTML += `
     <div class="card">
     <div class="face face-back">
-      <img src="./src/images/back.png" alt="" class="back" />
+      <img src="./src/images/back.png" alt="" class="back-img" />
     </div>
     <div class="face face-front">
-      <img class="front" src="./src/images/${individualCardIndex}.gif" alt="" />
+      <img class="front-img" src="./src/images/${individualCardIndex}.gif" alt="" />
       <p>${individualCardIndex}</p>
     </div>
   </div>`;
@@ -54,7 +58,32 @@ function cardsDealer(individualCardIndex) {
 // Vira a carta
 function flipCard(card) {
   card.addEventListener("click", function () {
+    const clickedCard = this.querySelector(".front-img").getAttribute("src");
     this.classList.add("clicked");
+    clickedCardsArray.push(clickedCard);
+    pairComparison();
+    
   });
+}
+
+// compara as cartas e chama a função para desvirar
+// caso as cartas sejam diferentes
+function pairComparison() {
+  if (clickedCardsArray.length === 2) {
+    if (clickedCardsArray[0] !== clickedCardsArray[1]) {
+      setTimeout(undoFlipCards, 1000);
+    } else {
+      clickedCardsArray = [];
+    }
+  }
+}
+
+// desvira as cartas selecionadas
+function undoFlipCards() {
+  clickedCardsArray.forEach((element)=>{
+    const clickedCard = document.querySelector(`.clicked img[src='${element}']`).parentNode.parentNode;
+    clickedCard.classList.remove('clicked');
+  });
+  clickedCardsArray = [];
 }
 
