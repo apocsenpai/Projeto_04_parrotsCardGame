@@ -22,12 +22,19 @@ while (numberOfCards < 4 || numberOfCards > 14 || numberOfCards % 2 !== 0) {
   numberOfCards = prompt(`Digite um número par, por favor`);
 }
 
-//introduz os índices para referenciar as cartas
+// introduz os índices para referenciar as cartas
 while (cardsIndex.length < numberOfCards) {
   cardsIndex.push(index);
   cardsIndex.push(index);
   index++;
 }
+
+//variaveis para o cronometro
+let millisecond = 0;
+let second = 0;
+let minute = 0;
+
+
 
 // chama a função que embaralha
 cardsIndex.sort(shuffler);
@@ -64,10 +71,12 @@ function cardsDealer(individualCardIndex) {
 function flipCard(card) {
   card.addEventListener("click", function () {
     const clickedCard = this.querySelector(".front-img").getAttribute("src");
-    this.classList.add("clicked");
-    clickedCardsArray.push(clickedCard);
-    pairComparison();
-    qntdClicks++;
+    if(this.classList.contains('clicked')!==true){
+      this.classList.add("clicked");
+      clickedCardsArray.push(clickedCard);
+      pairComparison();
+      qntdClicks++;
+    }
   });
 }
 
@@ -102,3 +111,4 @@ function wonThaGame() {
     }
   }, 1000);
 }
+

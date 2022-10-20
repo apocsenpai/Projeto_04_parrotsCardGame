@@ -10,12 +10,29 @@
   padding-bottom: 34px;
 }
 .header-content {
-  margin: 45px auto;
   font-family: "Roboto", sans-serif;
   font-size: 56px;
   font-weight: 700;
   color: #75b59e;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 10px 10px;
+}
+.header-content h1 {
+  padding: 30px;
+}
+.header-content .stopwatch {
+  font-size: 30px;
+  align-self: flex-end;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(226, 189, 43, 0.344);
+  border-radius: 100px;
 }
 .main-content {
   display: flex;
@@ -43,18 +60,18 @@
   backface-visibility: hidden;
   transform-style: preserve-3d;
 }
-.face-front{
-    transform: rotateY(180deg);
+.face-front {
+  transform: rotateY(180deg);
 }
-.clicked .face-back{
-    transform: rotateY(-180deg);
+.clicked .face-back {
+  transform: rotateY(-180deg);
 }
-.clicked .face-front{
-    transform: rotateY(0deg);
+.clicked .face-front {
+  transform: rotateY(0deg);
 }
-.card img{
-    width: 100px;
+.card img {
+  width: 100px;
 }
-p{
+p {
   display: none;
 }
