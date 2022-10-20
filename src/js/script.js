@@ -34,7 +34,7 @@ let millisecond = 0;
 let second = 0;
 let minute = 0;
 
-
+setInterval(stopwatch, 10);
 
 // chama a função que embaralha
 cardsIndex.sort(shuffler);
@@ -112,3 +112,17 @@ function wonThaGame() {
   }, 1000);
 }
 
+function stopwatch() {
+  millisecond += 10;
+  if (millisecond === 1000) {
+    second++;
+    millisecond = 0;
+    document.querySelector(".second").innerHTML = second;
+    if (second === 60) {
+      minute++;
+      second = 0;
+      document.querySelector(".minute").innerHTML = minute;
+    }
+  }
+  document.querySelector(".millisecond").innerHTML = millisecond;
+}
