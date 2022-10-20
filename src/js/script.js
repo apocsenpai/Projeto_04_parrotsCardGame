@@ -23,8 +23,27 @@ while (cardsIndex.length < numberOfCards) {
 // chama a função que embaralha
 cardsIndex.sort(shuffler);
 
+//forEach para iterar a array usando a função que
+// coloca os cards na tela
+cardsIndex.forEach(cardsDealer);
 
-// função que embaralha os itens da array
+
+
+// embaralha os itens da array
 function shuffler() {
   return Math.random() - 0.5;
+}
+
+// coloca os cards na tela
+function cardsDealer(individualCardIndex) {
+  gameTable.innerHTML += `
+    <div class="card">
+    <div class="face face-back">
+      <img src="./src/images/back.png" alt="" class="back" />
+    </div>
+    <div class="face face-front">
+      <img class="front" src="./src/images/${individualCardIndex}.gif" alt="" />
+      <p>${individualCardIndex}</p>
+    </div>
+  </div>`;
 }
