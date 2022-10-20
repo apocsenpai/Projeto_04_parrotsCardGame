@@ -19,3 +19,12 @@ while (cardsIndex.length < numberOfCards) {
   cardsIndex.push(index);
   index++;
 }
+
+// chama a função que embaralha
+cardsIndex.sort(shuffler);
+
+
+// função que embaralha os itens da array
+function shuffler() {
+  return Math.random() - 0.5;
+}
