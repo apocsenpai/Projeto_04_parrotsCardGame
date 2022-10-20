@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #eef9bf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 34px;
+}
+.header-content {
+  margin: 45px auto;
+  font-family: "Roboto", sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #75b59e;
+  text-align: center;
+}
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 34px;
+  padding: 0px 100px;
+}
+.card {
+  width: 117px;
+  height: 146px;
+  position: relative;
+}
+.face {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #99cea8;
+  background-color: #a7e9af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms ease;
+  position: absolute;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+.face-front{
+    transform: rotateY(180deg);
+}
+.clicked .face-back{
+    transform: rotateY(-180deg);
+}
+.clicked .face-front{
+    transform: rotateY(0deg);
+}
+.card img{
+    width: 100px;
+}
+p{
+  display: none;
+}
