@@ -22,6 +22,7 @@
 }
 .header-content h1 {
   padding: 30px;
+  text-align: center;
 }
 .header-content .stopwatch {
   font-size: 30px;
@@ -77,4 +78,13 @@ p {
 }
 .audio{
   height: 0px;
+}
+
+@media (max-width: 374px){
+  .header-content h1{
+    font-size: 36px;
+  }
+  .header-content .stopwatch{
+    align-self: center;
+  }
 }
