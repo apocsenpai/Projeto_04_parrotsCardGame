@@ -75,6 +75,9 @@ function cardsDealer(individualCardIndex) {
 // Vira a carta
 function flipCard(card) {
   card.addEventListener("click", function () {
+    if(clickedCardsArray.length === 2){
+      return false;
+    }
     const clickedCard = this.querySelector(".front-img").getAttribute("src");
     if (this.classList.contains("clicked") !== true) {
       this.classList.add("clicked");
@@ -88,12 +91,12 @@ function flipCard(card) {
 // compara as cartas e chama a função para desvirar
 // caso as cartas sejam diferentes
 function pairComparison() {
+  
   if (clickedCardsArray.length === 2) {
     if (clickedCardsArray[0] !== clickedCardsArray[1]) {
       wrongAudio.play();
       setTimeout(undoFlipCards, 1000);
     } else {
-      console.log(rightAudio);
       rightAudio.play();
       clickedCardsArray = [];
       qntdJogadasCertas++;
