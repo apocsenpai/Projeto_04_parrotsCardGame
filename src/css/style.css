@@ -75,3 +75,6 @@
 p {
   display: none;
 }
+.audio{
+  height: 0px;
+}

@@ -1,5 +1,10 @@
 let numberOfCards = numberOfCardsSelector();
 
+//palhaçadinhas
+const wrongAudio = document.getElementById("wrongAudio");
+const rightAudio = document.getElementById("rightAudio");
+const winAudio = document.getElementById("winAudio");
+
 //array qie irá receber os índices das cartas
 let cardsIndex = [];
 let index = 0;
@@ -85,8 +90,11 @@ function flipCard(card) {
 function pairComparison() {
   if (clickedCardsArray.length === 2) {
     if (clickedCardsArray[0] !== clickedCardsArray[1]) {
+      wrongAudio.play();
       setTimeout(undoFlipCards, 1000);
     } else {
+      console.log(rightAudio);
+      rightAudio.play();
       clickedCardsArray = [];
       qntdJogadasCertas++;
       wonThaGame();
@@ -106,17 +114,16 @@ function undoFlipCards() {
 
 //Mensagem que mostra se ele ganhou
 function wonThaGame() {
- 
-  setTimeout(() => {
-    if (qntdJogadasCertas === numberOfCards / 2) {
+  if (qntdJogadasCertas === numberOfCards / 2) {
+    winAudio.play();
+    setTimeout(() => {
       alert(
         `Você ganhou em ${qntdClicks} jogadas! E terminou em ${minute}m${second}s${millisecond}`
       );
       tryAgain();
-    }
-  }, 500);
+    }, 3000);
+  }
 }
-
 //variaveis para o cronometro
 let millisecond = 0;
 let second = 0;
@@ -152,7 +159,7 @@ function tryAgain() {
   }
 }
 
-function reset(){
+function reset() {
   millisecond = 0;
   minute = 0;
   second = 0;
