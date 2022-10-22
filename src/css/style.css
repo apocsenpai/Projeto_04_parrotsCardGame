@@ -71,20 +71,37 @@
   transform: rotateY(0deg);
 }
 .card img {
-  width: 100px;
+  width: 85.5%;
 }
 p {
   display: none;
 }
-.audio{
+.audio {
   height: 0px;
 }
 
-@media (max-width: 374px){
-  .header-content h1{
+/* diminui o tamanho dos cards pois os cards em coluna estavam prejudicando a jogabilidade no mobile */
+
+@media (max-width: 769px) {
+  .main-content {
+    padding: 0px 20px;
+  }
+  .card {
+    width: 94px;
+    height: 117px;
+  }
+}
+@media (max-width: 549px) {
+  .card {
+    width: 70px;
+    height: 88px;
+  }
+}
+@media (max-width: 375px) {
+  .header-content h1 {
     font-size: 36px;
   }
-  .header-content .stopwatch{
+  .header-content .stopwatch {
     align-self: center;
   }
 }
